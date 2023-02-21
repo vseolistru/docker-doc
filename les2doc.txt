@@ -1,0 +1,20 @@
+создание образов
+создаем Dockerfile, который содкржит инструкции по созданию образа приложения.
+При создании образа можно указать имя и тег для образа
+Процесс создания нового образа docker build .
+добавить имя докер файлу, например: docker build . -t <myImage>:(version)
+sudo docker run -it my-image:1.01
+удаляем образы docker rmi <image-name> --force
+для кастомных файлов docker build . -f Dockerfile-<name>
+
+посмотреть все тома в докер sudo docker volume ls
+детализация тома sudo docker inspect <volume-name> 
+посмотреть логи контейнеров docker logs <container-name>
+
+создание и запуск образа из yml
+docker-compose up
+
+
+для запуска docker-compose up в фоновом режиме -d
+остановка контейнеров и удаление  docker-compose down
+новый билд при обновлении кода docker-compose up -d --build

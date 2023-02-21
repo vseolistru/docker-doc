@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./frontend
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      # путь к папке внутри контерйнера, которая не будет перезаписываться
+      - /app/node_modules   
+      - ./frontend:/app
+      #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере   
+  api:
+    build: ./api
+    restart: always
+    ports:
+      - "5555:5000"
+    depends_on:  
+      - mysql
+    volumes:
+      # путь к папке внутри контерйнера, которая не будет перезаписываться
+      - /app/node_modules   
+      - ./api:/app
+      #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере      
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_PORT: '3306'
+      MYSQL_DATABASE: time_db 
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: time_db
+    volumes:
+      - mysql_data:/var/lib/mysql   
+  adminer: 
+    image: adminer
+    restart: always
+    ports:
+      - "8080:8080"
+volumes:
+  mysql_data:      
