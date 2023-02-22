@@ -2,27 +2,29 @@ version: '3'
 
 services:
   frontend:
-    build: ./frontend
+    image: vknseo/time-app-frontend
+    # build: ./frontend
     restart: always
     ports:
       - "3000:3000"
-    volumes:
-      # путь к папке внутри контерйнера, которая не будет перезаписываться
-      - /app/node_modules   
-      - ./frontend:/app
-      #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере   
+    # volumes:
+    #   # путь к папке внутри контерйнера, которая не будет перезаписываться
+    #   - /app/node_modules   
+    #   - ./frontend:/app
+    #   #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере   
   api:
-    build: ./api
+    image: vknseo/time-app-api
+    # build: ./api
     restart: always
     ports:
       - "5555:5000"
     depends_on:  
       - mysql
-    volumes:
-      # путь к папке внутри контерйнера, которая не будет перезаписываться
-      - /app/node_modules   
-      - ./api:/app
-      #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере      
+    # volumes:
+    #   # путь к папке внутри контерйнера, которая не будет перезаписываться
+    #   - /app/node_modules   
+    #   - ./api:/app
+    #   #путь к локальной папке проекта, после - ":" путь к локальной папке в контейнере      
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
@@ -36,11 +38,12 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: time_db
     volumes:
-      - mysql_data:/var/lib/mysql   
+      - mysql_data_pub:/var/lib/mysql   
   adminer: 
     image: adminer
     restart: always
     ports:
       - "8080:8080"
 volumes:
-  mysql_data:      
+  # mysql_data:  
+  mysql_data_pub:    

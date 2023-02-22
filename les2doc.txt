@@ -13,8 +13,15 @@ sudo docker run -it my-image:1.01
 
 создание и запуск образа из yml
 docker-compose up
-
+для кастомного файла
+docker-compose -f Dockerfile-<name>.yml up - d
 
 для запуска docker-compose up в фоновом режиме -d
+
+
 остановка контейнеров и удаление  docker-compose down
 новый билд при обновлении кода docker-compose up -d --build
+
+создаем образ для докер хаб с тегом: docker build -t <username/imageName> .
+sudo docker login
+sudo docker push <imageName>
